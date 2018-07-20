@@ -59,11 +59,12 @@ public class SetupActivity extends AppCompatActivity {
         currentUserID = mAuth.getCurrentUser().getUid();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID);
         UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
+        // the relevant folder will be created in the Firebase database
 
 
         UserName = (EditText) findViewById(R.id.setup_username);
         FullName = (EditText) findViewById(R.id.setup_full_name);
-        //CountryName = (EditText) findViewById(R.id.setup_country_name);
+        CountryName = (EditText) findViewById(R.id.setup_country);
         SaveInformationbuttion = (Button) findViewById(R.id.setup_information_button);
         ProfileImage = (CircleImageView) findViewById(R.id.setup_profile_image);
         loadingBar = new ProgressDialog(this);
