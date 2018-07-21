@@ -30,6 +30,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </FrameLayout>
+
+        <ImageButton
+            android:id="@+id/add_new_post_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="4dp"
+            android:background="@color/colorPrimaryDark"
+            android:scaleType="centerCrop"
+            android:src="@drawable/add_post_high" />
+
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView
