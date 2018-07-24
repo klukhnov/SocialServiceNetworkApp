@@ -134,12 +134,23 @@ public class MainActivity extends AppCompatActivity {
                 (Posts.class, R.layout.all_post_layout, PostsViewHolder.class, PostsRef) {
             @Override
             protected void populateViewHolder(PostsViewHolder viewHolder, Posts model, int position) {
+                final String PostKey = getRef(position).getKey(); // getting the key of the post
+
                 viewHolder.setFullname(model.getFullname());
                 viewHolder.setTime(model.getTime());
                 viewHolder.setDate(model.getDate());
                 viewHolder.setDescripiton(model.getDescripiton());
                 viewHolder.setPostimage(getApplicationContext(), model.getProfileimage());
                 viewHolder.setPostimage(getApplicationContext(), model.getPostimage());
+
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent clickPostIntent = new Intent(MainActivity.this, ClickPostActivity.class);
+                        clickPostIntent.putExtra("PostKey", PostKey);
+                        startActivity(clickPostIntent);
+                    }
+                });
             }
         };
 
