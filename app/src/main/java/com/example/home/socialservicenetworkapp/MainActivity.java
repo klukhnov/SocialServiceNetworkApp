@@ -157,16 +157,16 @@ public class MainActivity extends AppCompatActivity {
         postList.setAdapter(firebaseRecyclerAdapter);
     }
 
-    public static class PostsViewHolder extends RecyclerView.ViewHolder{
+    public static class PostsViewHolder extends RecyclerView.ViewHolder {
 
         View mView;
 
         public PostsViewHolder(View itemView) {
-        super(itemView);
-        mView = itemView;
+            super(itemView);
+            mView = itemView;
         }
 
-        public void setFullname(String fullname){
+        public void setFullname(String fullname) {
             TextView username = mView.findViewById(R.id.post_user_name);
             username.setText(fullname);
         }
@@ -176,22 +176,22 @@ public class MainActivity extends AppCompatActivity {
             Picasso.with(ctx).load(profileimage).into(image);
         }
 
-        public void setTime(String time){
+        public void setTime(String time) {
             TextView PostTime = mView.findViewById(R.id.post_time);
             PostTime.setText("   " + time);
         }
 
-        public void setDate(String date){
+        public void setDate(String date) {
             TextView PostDate = mView.findViewById(R.id.post_time);
             PostDate.setText("   " + date);
         }
 
-        public void setDescripiton(String descripiton){
+        public void setDescripiton(String descripiton) {
             TextView PostDescription = mView.findViewById(R.id.post_description);
             PostDescription.setText(descripiton);
         }
 
-        public void setPostimage(Context ctx, String postimage){
+        public void setPostimage(Context ctx, String postimage) {
             ImageView PostImage = mView.findViewById(R.id.post_image);
             Picasso.with(ctx).load(postimage).into(PostImage);
         }
@@ -289,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.nav_settings:
-                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+                SendUserToSettingsActivity();
                 break;
 
             case R.id.nav_logout:
@@ -297,6 +297,11 @@ public class MainActivity extends AppCompatActivity {
                 SendUserToLoginActivity();
                 break;
         }
+    }
+
+    private void SendUserToSettingsActivity() {
+        Intent loginIntent = new Intent(MainActivity.this, SettingsActivity.class);
+        startActivity(loginIntent);
     }
 }
 
