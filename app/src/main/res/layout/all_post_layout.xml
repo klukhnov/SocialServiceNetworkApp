@@ -85,6 +85,33 @@
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:padding="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/like_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/dislike"/>
+            <TextView
+                android:id="@+id/display_no_of_likes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 Likes"
+                android:layout_marginTop="28dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"/>
+            <ImageButton
+                android:id="@+id/comment_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/comment"
+                android:layout_marginLeft="190dp"/>
+
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
