@@ -340,26 +340,6 @@ public class MainActivity extends AppCompatActivity {
                 SendUserToPostActivity();
                 break;
 
-            case R.id.nav_profile:
-                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.nav_home:
-                Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.nav_friends:
-                Toast.makeText(this, "Friend List", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.nav_find_friends:
-                Toast.makeText(this, "Find Friends", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.nav_messages:
-                Toast.makeText(this, "Messages", Toast.LENGTH_SHORT).show();
-                break;
-
             case R.id.nav_settings:
                 SendUserToSettingsActivity();
                 break;
