@@ -5,16 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
-    android:background="@drawable/login">
-
-    <ImageView
-        android:id="@+id/register_icon"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
-        app:srcCompat="@drawable/logo" />
+    android:background="@drawable/register">
 
     <EditText
         android:id="@+id/register_email"
