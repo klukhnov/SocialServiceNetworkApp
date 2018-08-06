@@ -47,11 +47,14 @@
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="350dp"
         android:layout_gravity="start"
         android:layout_marginBottom="3dp"
-        app:menu="@menu/navigation_menu"
-        app:itemTextAppearance="@style/NavigationText">
+        android:background="@color/whiteSemiTransparent"
+        android:fadingEdge="horizontal|vertical"
+        android:fadingEdgeLength="100sp"
+        app:itemTextAppearance="@style/NavigationText"
+        app:menu="@menu/navigation_menu">
 
     </android.support.design.widget.NavigationView>
 
