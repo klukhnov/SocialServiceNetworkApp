@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 viewHolder.setTime(model.getTime());
                 viewHolder.setDate(model.getDate());
                 viewHolder.setDescripiton(model.getDescripiton());
-                viewHolder.setPostimage(getApplicationContext(), model.getProfileimage());
+                viewHolder.setProfileimage(getApplicationContext(), model.getProfileimage());
                 viewHolder.setPostimage(getApplicationContext(), model.getPostimage());
 
                 viewHolder.setLikeButtonStatus(PostKey);
