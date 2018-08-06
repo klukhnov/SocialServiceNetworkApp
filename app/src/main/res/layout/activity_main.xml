@@ -37,7 +37,8 @@
             android:layout_height="48dp"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="4dp"
-            android:background="@color/colorPrimaryDark"
+            android:layout_marginTop="5dp"
+            android:background="#18b2d1"
             android:scaleType="centerCrop"
             android:src="@drawable/add_post_high" />
 
@@ -49,7 +50,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:layout_marginBottom="3dp"
-        app:menu="@menu/navigation_menu">
+        app:menu="@menu/navigation_menu"
+        app:itemTextAppearance="@style/NavigationText">
 
     </android.support.design.widget.NavigationView>
 
