@@ -20,7 +20,7 @@
         <FrameLayout
             android:id="@+id/main_container"
             android:layout_width="match_parent"
-            android:layout_height="510dp"
+            android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="57dp">
@@ -38,7 +38,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginRight="4dp"
             android:layout_marginTop="5dp"
-            android:background="#18b2d1"
+            android:background="#00ffffff"
             android:scaleType="centerCrop"
             android:src="@drawable/add_post_high" />
 
