@@ -122,12 +122,12 @@ public class CommentsActivity extends AppCompatActivity {
 
         public void setDate(String date){
             TextView myDate = (TextView) mView.findViewById(R.id.comment_date);
-            myDate.setText(" Date: " + date);
+            myDate.setText(" on: " + date);
         }
 
         public void setTime(String time) {
             TextView myTime = (TextView) mView.findViewById(R.id.comment_time);
-            myTime.setText(" Time: " + time);
+            myTime.setText(" at: " + time);
         }
 
     }
