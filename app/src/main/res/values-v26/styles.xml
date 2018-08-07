@@ -3,7 +3,7 @@
 
     <style name="NavigationText" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">@font/bredfont</item>
     </style>
 </resources>

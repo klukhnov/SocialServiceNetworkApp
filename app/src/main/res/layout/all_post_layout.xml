@@ -38,7 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="UserName"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/bredfont"
                     android:textColor="@color/colorBlack"
@@ -58,8 +58,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/bredfont"
-                        android:textColor="@color/colorBlack"
-                        android:text="Post updated"/>
+                        android:textColor="@color/colorBlack" />
                     <TextView
                         android:id="@+id/post_date"
                         android:layout_width="wrap_content"
@@ -90,12 +89,13 @@
             android:text="Description"
             android:fontFamily="@font/bredfont"
             android:textColor="@color/colorBlack"
+            android:textSize="18sp"
             android:layout_marginTop="5dp"/>
 
         <ImageView
             android:id="@+id/post_image"
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="320dp"
             android:adjustViewBounds="true"
             android:padding="5dp"
             android:background="@drawable/image"

@@ -2,6 +2,7 @@ package com.example.home.socialservicenetworkapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -64,15 +65,19 @@ public class MainActivity extends AppCompatActivity {
 
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Home");
-
+        getSupportActionBar().setTitle("Menu");
+        mToolbar.setTitle("Menu");
+        mToolbar.setTitleTextColor(Color.BLACK);
+        mToolbar.setTitleTextAppearance(this, R.style.NavigationText);
 
         AddNewPostButton = findViewById(R.id.add_new_post_button);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawable_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.hmenu);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
         postList = (RecyclerView) findViewById(R.id.all_users_post_list);
