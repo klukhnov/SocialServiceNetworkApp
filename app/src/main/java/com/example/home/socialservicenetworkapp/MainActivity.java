@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                         String image = dataSnapshot.child("profileimage").getValue().toString();
                         Picasso.with(MainActivity.this).load(image).placeholder(R.drawable.profile).into(NavProfileImage);
                     } else {
-                        Toast.makeText(MainActivity.this, "Profile name do not exists...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Profile name does not exist...", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 viewHolder.setFullname(model.getFullname());
                 viewHolder.setTime(model.getTime());
                 viewHolder.setDate(model.getDate());
-                viewHolder.setDescripiton(model.getDescripiton());
+                viewHolder.setDescription(model.getDescription());
                 viewHolder.setProfileimage(getApplicationContext(), model.getProfileimage());
                 viewHolder.setPostimage(getApplicationContext(), model.getPostimage());
 
@@ -254,13 +254,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void setDate(String date) {
-            TextView PostDate = mView.findViewById(R.id.post_time);
+            TextView PostDate = mView.findViewById(R.id.post_date);
             PostDate.setText("   " + date);
         }
 
-        public void setDescripiton(String descripiton) {
+        public void setDescription(String description) {
             TextView PostDescription = mView.findViewById(R.id.post_description);
-            PostDescription.setText(descripiton);
+            PostDescription.setText(" " + description);
         }
 
         public void setPostimage(Context ctx, String postimage) {

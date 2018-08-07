@@ -1,18 +1,18 @@
 package com.example.home.socialservicenetworkapp;
 
 public class Posts {
-    public String uid, time, date, postimage, descripiton, profileimage, fullname;
+    public String uid, time, date, postimage, description, profileimage, fullname;
 
     public Posts(){
 
     }
 
-    public Posts(String uid, String time, String date, String postimage, String descripiton, String profileimage, String fullname) {
+    public Posts(String uid, String time, String date, String postimage, String description, String profileimage, String fullname) {
         this.uid = uid;
         this.time = time;
         this.date = date;
         this.postimage = postimage;
-        this.descripiton = descripiton;
+        this.description = description;
         this.profileimage = profileimage;
         this.fullname = fullname;
     }
@@ -49,12 +49,12 @@ public class Posts {
         this.postimage = postimage;
     }
 
-    public String getDescripiton() {
-        return descripiton;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripiton(String descripiton) {
-        this.descripiton = descripiton;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getProfileimage() {
