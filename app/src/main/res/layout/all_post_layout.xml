@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +26,9 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/profile"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                app:civ_border_color="@color/colorWhite"
+                app:civ_border_width="1dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,6 +40,8 @@
                     android:text="UserName"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="@font/bredfont"
+                    android:textColor="@color/colorBlack"
                     android:textAlignment="textStart"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
@@ -52,12 +57,16 @@
                         android:id="@+id/text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/bredfont"
+                        android:textColor="@color/colorBlack"
                         android:text="Post updated"/>
                     <TextView
                         android:id="@+id/post_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Date"
+                        android:fontFamily="@font/bredfont"
+                        android:textColor="@color/colorBlack"
                         android:layout_marginLeft="5dp"/>
 
                     <TextView
@@ -65,6 +74,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Time"
+                        android:fontFamily="@font/bredfont"
+                        android:textColor="@color/colorBlack"
                         android:layout_marginLeft="5dp"/>
 
 
@@ -77,6 +88,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Description"
+            android:fontFamily="@font/bredfont"
+            android:textColor="@color/colorBlack"
             android:layout_marginTop="5dp"/>
 
         <ImageView
@@ -85,6 +98,7 @@
             android:layout_height="280dp"
             android:adjustViewBounds="true"
             android:padding="5dp"
+            android:background="@drawable/image"
             android:scaleType="centerCrop" />
 
         <LinearLayout
@@ -97,7 +111,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="18dp"
+                android:layout_marginLeft="38dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/dislike" />
             <TextView
@@ -105,15 +119,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0 Likes"
+                android:fontFamily="@font/bredfont"
+                android:textColor="@color/colorBlack"
                 android:layout_marginTop="28dp"
                 android:layout_marginLeft="10dp"
                 android:textSize="15sp"/>
             <ImageButton
                 android:id="@+id/comment_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="20dp"
                 android:src="@drawable/comment"
-                android:layout_marginLeft="190dp"/>
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="240dp"/>
 
         </LinearLayout>
     </LinearLayout>

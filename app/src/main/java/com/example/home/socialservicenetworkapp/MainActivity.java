@@ -266,6 +266,7 @@ public class MainActivity extends AppCompatActivity {
         public void setPostimage(Context ctx, String postimage) {
             ImageView PostImage = mView.findViewById(R.id.post_image);
             Picasso.with(ctx).load(postimage).into(PostImage);
+            PostImage.setClipToOutline(true);
         }
     }
 
