@@ -1,6 +1,7 @@
 package com.example.home.socialservicenetworkapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -74,8 +75,12 @@ public class PostActivity extends AppCompatActivity
         mToolbar = (Toolbar) findViewById(R.id.update_post_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Update Post");
+        getSupportActionBar().setDisplayShowHomeEnabled(true); // for adding a back button
+        getSupportActionBar().setTitle("Add Post");
+        mToolbar.setTitle("Add Post");
+        mToolbar.setTitleTextColor(Color.BLACK);
+        mToolbar.setTitleTextAppearance(this, R.style.NavigationText);
+        mToolbar.setNavigationIcon(R.drawable.backbutton);
 
 
         SelectPostImage.setOnClickListener(new View.OnClickListener() {
@@ -104,16 +109,16 @@ public class PostActivity extends AppCompatActivity
 
         if(ImageUri == null)
         {
-            Toast.makeText(this, "Please select post image...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please select an image...", Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(Description))
         {
-            Toast.makeText(this, "Please say something about your image...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please add description...", Toast.LENGTH_SHORT).show();
         }
         else
         {
-            loadingBar.setTitle("Add New Post");
-            loadingBar.setMessage("Please wait, while we are updating your new post...");
+            loadingBar.setTitle("Add Post");
+            loadingBar.setMessage("The post is being updated...");
             loadingBar.show();
             loadingBar.setCanceledOnTouchOutside(true);
 
@@ -145,7 +150,7 @@ public class PostActivity extends AppCompatActivity
                 if(task.isSuccessful())
                 {
                     downloadUrl = task.getResult().getDownloadUrl().toString();
-                    Toast.makeText(PostActivity.this, "image uploaded successfully to Storage...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostActivity.this, "Upload successful.", Toast.LENGTH_SHORT).show();
 
                     SavingPostInformationToDatabase();
 
@@ -153,7 +158,7 @@ public class PostActivity extends AppCompatActivity
                 else
                 {
                     String message = task.getException().getMessage();
-                    Toast.makeText(PostActivity.this, "Error occured: " + message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -186,12 +191,12 @@ public class PostActivity extends AppCompatActivity
                                     if(task.isSuccessful())
                                     {
                                         SendUserToMainActivity();
-                                        Toast.makeText(PostActivity.this, "New Post is updated successfully.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(PostActivity.this, "New Post updated successfully.", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
                                     }
                                     else
                                     {
-                                        Toast.makeText(PostActivity.this, "Error Occured while updating your post.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(PostActivity.this, "Error.", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
                                     }
                                 }
