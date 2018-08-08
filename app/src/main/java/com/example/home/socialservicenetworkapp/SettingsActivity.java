@@ -2,6 +2,7 @@ package com.example.home.socialservicenetworkapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -56,8 +57,13 @@ public class SettingsActivity extends AppCompatActivity {
 
         mToolbar = findViewById(R.id.settings_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Account settings");
+        getSupportActionBar().setTitle("Profile");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setTitle("Profile");
+        mToolbar.setTitleTextColor(Color.BLACK);
+        mToolbar.setTitleTextAppearance(this, R.style.NavigationText);
+        mToolbar.setNavigationIcon(R.drawable.backbutton);
+
 
         userName = findViewById(R.id.settings_username);
         userProfName = findViewById(R.id.settings_full_name);
@@ -188,7 +194,7 @@ public class SettingsActivity extends AppCompatActivity {
     private void ValidateAccountInfo() {
         String username = userName.getText().toString();
         String usersprofilename = userProfName.getText().toString();
-        String userstatus = userStatus.getText().toString();
+        String userstatus = userStatus.getText().toString(); //--
         String usersdob = userDOB.getText().toString();
         String userscountry = userCountry.getText().toString();
         String usersgender = userGender.getText().toString();
