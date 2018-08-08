@@ -15,73 +15,81 @@
         android:layout_width="match_parent"
         android:layout_height="458dp"
         android:layout_centerInParent="true">
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/settings_profile_image"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/profile"/>
+                android:src="@drawable/profile" />
+
+            <Spinner
+                android:id="@+id/spinnerStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/settings_profile_image" />
 
             <EditText
                 android:id="@+id/settings_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/settings_profile_image"
-                android:hint="Profile status"/>
+                android:layout_below="@+id/spinnerStatus"
+                android:hint="Profile status" />
 
             <EditText
                 android:id="@+id/settings_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/settings_status"
-                android:hint="Username"/>
+                android:hint="Username" />
 
             <EditText
                 android:id="@+id/settings_full_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/settings_username"
-                android:hint="Full name"/>
+                android:hint="Full name" />
 
             <EditText
                 android:id="@+id/settings_country"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/settings_full_name"
-                android:hint="Country"/>
+                android:hint="Country" />
 
             <EditText
                 android:id="@+id/settings_dob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/settings_country"
-                android:hint="Date of birth"/>
+                android:hint="Date of birth" />
+
             <EditText
                 android:id="@+id/settings_relationship_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/settings_dob"
-                android:hint="Relationship status"/>
+                android:hint="Relationship status" />
+
             <EditText
                 android:id="@+id/settings_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/settings_relationship_status"
-                android:hint="Relationship status"/>
+                android:hint="Gende" />
 
             <Button
                 android:id="@+id/update_account_settings_button"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_below="@+id/settings_relationship_status"
-                android:text="Update account settings"
-                android:background="@drawable/button"/>
-
+                android:layout_below="@+id/settings_gender"
+                android:background="@drawable/button"
+                android:text="Update account settings" />
 
 
         </RelativeLayout>

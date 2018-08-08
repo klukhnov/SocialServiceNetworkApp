@@ -10,8 +10,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,7 +36,7 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Toolbar mToolbar;
     private EditText userName, userProfName, userStatus, userCountry, userGender, userDOB, userRelationshipStatus;
@@ -49,6 +52,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private ProgressDialog loadingBar;
     private StorageReference UserProfileImageRef;
+    private Spinner staticSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,7 @@ public class SettingsActivity extends AppCompatActivity {
         mToolbar.setTitleTextColor(Color.BLACK);
         mToolbar.setTitleTextAppearance(this, R.style.NavigationText);
         mToolbar.setNavigationIcon(R.drawable.backbutton);
+        staticSpinner = (Spinner) findViewById(R.id.spinnerStatus);
 
 
         userName = findViewById(R.id.settings_username);
@@ -76,6 +81,15 @@ public class SettingsActivity extends AppCompatActivity {
         UpdateAcountSettingsButton = findViewById(R.id.update_account_settings_button);
         loadingBar = new ProgressDialog(this);
 
+        ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter
+                .createFromResource(this, R.array.status_array,
+                        android.R.layout.simple_spinner_item);
+        staticAdapter
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        staticSpinner.setAdapter(staticAdapter);
+        staticSpinner.setOnItemSelectedListener(this);
+
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
         SettingsUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
@@ -84,7 +98,7 @@ public class SettingsActivity extends AppCompatActivity {
         SettingsUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     String myProfileImage = dataSnapshot.child("profileimage").getValue().toString();
                     String myProfileName = dataSnapshot.child("fullname").getValue().toString();
                     String myProfileStatus = dataSnapshot.child("status").getValue().toString();
@@ -194,27 +208,29 @@ public class SettingsActivity extends AppCompatActivity {
     private void ValidateAccountInfo() {
         String username = userName.getText().toString();
         String usersprofilename = userProfName.getText().toString();
+
         String userstatus = userStatus.getText().toString(); //--
+
         String usersdob = userDOB.getText().toString();
         String userscountry = userCountry.getText().toString();
         String usersgender = userGender.getText().toString();
         String usersrelationshipstatus = userRelationshipStatus.getText().toString();
 
-        if(TextUtils.isEmpty(username)){
+        if (TextUtils.isEmpty(username)) {
             Toast.makeText(this, "Please add your name", Toast.LENGTH_SHORT).show();
-        }else if(TextUtils.isEmpty(usersprofilename)){
+        } else if (TextUtils.isEmpty(usersprofilename)) {
             Toast.makeText(this, "Please add your profile name", Toast.LENGTH_SHORT).show();
-        }else if(TextUtils.isEmpty(userstatus)){
+        } else if (TextUtils.isEmpty(userstatus)) {
             Toast.makeText(this, "Please add your status", Toast.LENGTH_SHORT).show();
-        }else if(TextUtils.isEmpty(usersdob)){
+        } else if (TextUtils.isEmpty(usersdob)) {
             Toast.makeText(this, "Please add your date of birth", Toast.LENGTH_SHORT).show();
-        }else if(TextUtils.isEmpty(userscountry)){
+        } else if (TextUtils.isEmpty(userscountry)) {
             Toast.makeText(this, "Please add your country", Toast.LENGTH_SHORT).show();
-        }else if(TextUtils.isEmpty(usersgender)){
+        } else if (TextUtils.isEmpty(usersgender)) {
             Toast.makeText(this, "Please add your gender", Toast.LENGTH_SHORT).show();
-        }else if(TextUtils.isEmpty(usersrelationshipstatus)){
+        } else if (TextUtils.isEmpty(usersrelationshipstatus)) {
             Toast.makeText(this, "Please add your relationship status", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             loadingBar.setTitle("Profile Image");
             loadingBar.setMessage("Please wait, while we updating your settings...");
             loadingBar.setCanceledOnTouchOutside(true);
@@ -235,20 +251,38 @@ public class SettingsActivity extends AppCompatActivity {
         SettingsUserRef.updateChildren(usersMap).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     SendUserToMainActivity();
                     Toast.makeText(SettingsActivity.this, "Account settings updated", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
-                }else {
+                } else {
                     Toast.makeText(SettingsActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }
             }
         });
     }
+
     private void SendUserToMainActivity() {
         Intent mainIntent = new Intent(SettingsActivity.this, MainActivity.class);
         startActivity(mainIntent);
         finish();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (position) {
+            case 0:
+                userStatus.setText("Active");
+                break;
+            case 1:
+                userStatus.setText("Inactive");
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
