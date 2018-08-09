@@ -28,46 +28,46 @@ import java.util.HashMap;
 
 public class CommentsActivity extends AppCompatActivity {
 
-    private RecyclerView CommentsList;
-    private ImageButton PostCommentButton;
-    private EditText CommentInputText;
+    private RecyclerView commentsList;
+    private ImageButton postCommentBtn;
+    private EditText commentInputTxt;
     private DatabaseReference UsersRef, PostsRef;
     private FirebaseAuth mAuth;
-    private String Post_Key, current_user_id;
+    private String postKey, currentUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments);
 
-        Post_Key = getIntent().getExtras().get("PostKey").toString();
+        postKey = getIntent().getExtras().get("PostKey").toString();
 
         mAuth = FirebaseAuth.getInstance();
-        current_user_id = mAuth.getCurrentUser().getUid();
+        currentUserId = mAuth.getCurrentUser().getUid();
 
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
-        PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(Post_Key).child("Comments");
+        PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(postKey).child("Comments");
 
-        CommentsList = findViewById(R.id.comments_list);
-        CommentsList.setHasFixedSize(true);
+        commentsList = findViewById(R.id.comments_list);
+        commentsList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
-        CommentsList.setLayoutManager(linearLayoutManager);
+        commentsList.setLayoutManager(linearLayoutManager);
 
-        PostCommentButton = findViewById(R.id.post_comment_btn);
-        CommentInputText = findViewById(R.id.comment_input);
+        postCommentBtn = findViewById(R.id.post_comment_btn);
+        commentInputTxt = findViewById(R.id.comment_input);
 
-        PostCommentButton.setOnClickListener(new View.OnClickListener() {
+        postCommentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UsersRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
+                UsersRef.child(currentUserId).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             String userName = dataSnapshot.child("username").getValue().toString();
                             ValidateComment(userName);
-                            CommentInputText.setText("");
+                            commentInputTxt.setText("");
                         }
                     }
 
@@ -96,7 +96,7 @@ public class CommentsActivity extends AppCompatActivity {
                 viewHolder.setTime(model.getTime());
             }
         };
-        CommentsList.setAdapter(firebaseRecyclerAdapter);
+        commentsList.setAdapter(firebaseRecyclerAdapter);
     }
 
     public static class CommentsViewHolder extends RecyclerView.ViewHolder {
@@ -133,7 +133,7 @@ public class CommentsActivity extends AppCompatActivity {
     }
 
     private void ValidateComment(String userName) {
-        String commentText = CommentInputText.getText().toString();
+        String commentText = commentInputTxt.getText().toString();
         if (TextUtils.isEmpty(commentText)) {
             Toast.makeText(this, "Please add a comment", Toast.LENGTH_SHORT).show();
         } else {
@@ -145,10 +145,10 @@ public class CommentsActivity extends AppCompatActivity {
             SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
             final String saveCurrentTime = currentTime.format(calFordDate.getTime());
 
-            final String RandomKey = current_user_id + saveCurrentDate + "-" + saveCurrentTime;
+            final String RandomKey = currentUserId + saveCurrentDate + "-" + saveCurrentTime;
 
             HashMap commentsMap = new HashMap();
-            commentsMap.put("uid", current_user_id);
+            commentsMap.put("uid", currentUserId);
             commentsMap.put("comment", commentText);
             commentsMap.put("date", saveCurrentDate);
             commentsMap.put("time", saveCurrentTime);

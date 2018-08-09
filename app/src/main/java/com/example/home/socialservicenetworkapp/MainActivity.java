@@ -39,15 +39,15 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView postList;
     private Toolbar mToolbar;
 
-    private CircleImageView NavProfileImage;
-    private TextView NavProfileUserName;
-    private ImageButton AddNewPostButton;
+    private CircleImageView navProfileImg;
+    private TextView navProfileUserName;
+    private ImageButton addNewPostBtn;
 
     private FirebaseAuth mAuth;
     private DatabaseReference UsersRef, PostsRef, LikesRef;
-    Boolean LikeChecker = false;
+    Boolean likeChecker = false;
 
-    String currentUserID;
+    String currentUserId;
 
 
     @Override
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        currentUserID = mAuth.getCurrentUser().getUid();
+        currentUserId = mAuth.getCurrentUser().getUid();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         mToolbar.setTitleTextColor(Color.BLACK);
         mToolbar.setTitleTextAppearance(this, R.style.NavigationText);
 
-        AddNewPostButton = findViewById(R.id.add_new_post_button);
+        addNewPostBtn = findViewById(R.id.add_new_post_button);
         drawerLayout = findViewById(R.id.drawable_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -89,21 +89,21 @@ public class MainActivity extends AppCompatActivity {
 
 
         View navView = navigationView.inflateHeaderView(R.layout.navigation_header);
-        NavProfileImage = navView.findViewById(R.id.nav_profile_image);
-        NavProfileUserName = navView.findViewById(R.id.nav_user_full_name);
+        navProfileImg = navView.findViewById(R.id.nav_profile_image);
+        navProfileUserName = navView.findViewById(R.id.nav_user_full_name);
 
 
-        UsersRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
+        UsersRef.child(currentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     if (dataSnapshot.hasChild("fullname")) {
                         String fullname = dataSnapshot.child("fullname").getValue().toString();
-                        NavProfileUserName.setText(fullname);
+                        navProfileUserName.setText(fullname);
                     }
                     if (dataSnapshot.hasChild("profileimage")) {
                         String image = dataSnapshot.child("profileimage").getValue().toString();
-                        Picasso.with(MainActivity.this).load(image).placeholder(R.drawable.profile).into(NavProfileImage);
+                        Picasso.with(MainActivity.this).load(image).placeholder(R.drawable.profile).into(navProfileImg);
                     } else {
                         Toast.makeText(MainActivity.this, "Profile name does not exist...", Toast.LENGTH_SHORT).show();
                     }
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        AddNewPostButton.setOnClickListener(new View.OnClickListener() {
+        addNewPostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SendUserToPostActivity();
@@ -173,17 +173,17 @@ public class MainActivity extends AppCompatActivity {
                 viewHolder.LikePostButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        LikeChecker = true;
+                        likeChecker = true;
                         LikesRef.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                if(LikeChecker.equals(true)){
-                                    if(dataSnapshot.child(PostKey).hasChild(currentUserID)){
-                                        LikesRef.child(PostKey).child(currentUserID).removeValue();
-                                        LikeChecker=false;
+                                if(likeChecker.equals(true)){
+                                    if(dataSnapshot.child(PostKey).hasChild(currentUserId)){
+                                        LikesRef.child(PostKey).child(currentUserId).removeValue();
+                                        likeChecker =false;
                                     }else{
-                                        LikesRef.child(PostKey).child(currentUserID).setValue(true);
-                                        LikeChecker=false;
+                                        LikesRef.child(PostKey).child(currentUserId).setValue(true);
+                                        likeChecker =false;
                                     }
                                 }
                             }

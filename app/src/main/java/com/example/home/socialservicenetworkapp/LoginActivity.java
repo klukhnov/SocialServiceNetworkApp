@@ -30,10 +30,10 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button LoginButton;
-    private EditText UserEmail, UserPassword;
-    private ImageView googleSignInButton;
-    private TextView NeedNewAccountLink;
+    private Button loginBtn;
+    private EditText userEmail, userPassword;
+    private ImageView googleSignInBtn;
+    private TextView needNewAccountLink;
     private FirebaseAuth mAuth;
     private ProgressDialog loadingBar;
     private static final int RC_SIGN_IN = 1;
@@ -46,21 +46,21 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-        NeedNewAccountLink = findViewById(R.id.register_account_link);
-        UserEmail = findViewById(R.id.login_email);
-        UserPassword = findViewById(R.id.login_password);
-        LoginButton = findViewById(R.id.login_button);
+        needNewAccountLink = findViewById(R.id.register_account_link);
+        userEmail = findViewById(R.id.login_email);
+        userPassword = findViewById(R.id.login_password);
+        loginBtn = findViewById(R.id.login_button);
         loadingBar = new ProgressDialog(this);
-        googleSignInButton = findViewById(R.id.google_signin_button);
+        googleSignInBtn = findViewById(R.id.google_signin_button);
 
-        NeedNewAccountLink.setOnClickListener(new View.OnClickListener() {
+        needNewAccountLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SendUserToRegisrterActivity();
             }
         });
 
-        LoginButton.setOnClickListener(new View.OnClickListener() {
+        loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AllowingUserToLogin();
@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        googleSignInButton.setOnClickListener(new View.OnClickListener() {
+        googleSignInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
@@ -104,9 +104,9 @@ public class LoginActivity extends AppCompatActivity {
             if (result.isSuccess()) {
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
-                Toast.makeText(this, "Authorisation is in process", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Authorisation in process", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Can't authorise", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Cannot authorise", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -140,7 +140,6 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -152,8 +151,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void AllowingUserToLogin() {
-        String email = UserEmail.getText().toString();
-        String password = UserPassword.getText().toString();
+        String email = userEmail.getText().toString();
+        String password = userPassword.getText().toString();
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Email please", Toast.LENGTH_LONG).show();

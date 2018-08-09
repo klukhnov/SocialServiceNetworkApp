@@ -19,8 +19,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText UserEmail, UserPassword, UserConfirmPassword;
-    private Button CreateAccountButton;
+    private EditText userEmail, userPassword, userConfirmPassword;
+    private Button createAccountBtn;
     private ProgressDialog loadingBar;
     private FirebaseAuth mAuth;
 
@@ -30,13 +30,13 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
-        UserEmail = findViewById(R.id.register_email);
-        UserPassword = findViewById(R.id.register_password);
-        UserConfirmPassword = findViewById(R.id.register_confirm_password);
-        CreateAccountButton = findViewById(R.id.register_create_account);
+        userEmail = findViewById(R.id.register_email);
+        userPassword = findViewById(R.id.register_password);
+        userConfirmPassword = findViewById(R.id.register_confirm_password);
+        createAccountBtn = findViewById(R.id.register_create_account);
         loadingBar = new ProgressDialog(this);
 
-        CreateAccountButton.setOnClickListener(new View.OnClickListener() {
+        createAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CreateNewAccount();
@@ -61,9 +61,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void CreateNewAccount() {
-        String email = UserEmail.getText().toString();
-        String password = UserPassword.getText().toString();
-        String confirmPassword = UserConfirmPassword.getText().toString();
+        String email = userEmail.getText().toString();
+        String password = userPassword.getText().toString();
+        String confirmPassword = userConfirmPassword.getText().toString();
 
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this, "Please write your email", Toast.LENGTH_LONG).show();

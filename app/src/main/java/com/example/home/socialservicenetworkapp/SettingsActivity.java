@@ -46,7 +46,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     private Button UpdateAcountSettingsButton;
     private CircleImageView userProfImage;
 
-    private DatabaseReference SettingsUserRef;
+    private DatabaseReference settingsUserRef;
     private FirebaseAuth mAuth;
 
     private String currentUserId;
@@ -54,7 +54,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     final static int Gallery_Pick = 1;
 
     private ProgressDialog loadingBar;
-    private StorageReference UserProfileImageRef;
+    private StorageReference userProfileImageRef;
     private Spinner statusSpinner;
     private SharedPreferences preferences;
 
@@ -107,10 +107,10 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
-        SettingsUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
-        UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
+        settingsUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
+        userProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
 
-        SettingsUserRef.addValueEventListener(new ValueEventListener() {
+        settingsUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -183,7 +183,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
                 Uri resultUri = result.getUri();
 
-                StorageReference filePath = UserProfileImageRef.child(currentUserId + ".jpg");
+                StorageReference filePath = userProfileImageRef.child(currentUserId + ".jpg");
 
                 filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -193,7 +193,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
                             final String downloadUrl = task.getResult().getDownloadUrl().toString();
 
-                            SettingsUserRef.child("profileimage").setValue(downloadUrl)
+                            settingsUserRef.child("profileimage").setValue(downloadUrl)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
@@ -261,7 +261,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         usersMap.put("country", userscountry);
         usersMap.put("gender", usersgender);
         usersMap.put("relationshipstatus", usersrelationshipstatus);
-        SettingsUserRef.updateChildren(usersMap).addOnCompleteListener(new OnCompleteListener() {
+        settingsUserRef.updateChildren(usersMap).addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
                 if (task.isSuccessful()) {

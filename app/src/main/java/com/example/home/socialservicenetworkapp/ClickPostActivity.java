@@ -22,9 +22,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class ClickPostActivity extends AppCompatActivity {
-    private ImageView PostImage;
-    private TextView PostDescription;
-    private Button DeletePostButton, EditPostButton;
+    private ImageView postImg;
+    private TextView postDesc;
+    private Button deletePostBtn, editPostBtn;
 
     private String PostKey, currentUserId, databaseUserID, description, image;
     private DatabaseReference ClickPostRef;
@@ -41,13 +41,13 @@ public class ClickPostActivity extends AppCompatActivity {
         PostKey = getIntent().getExtras().get("PostKey").toString();
         ClickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
 
-        PostImage = findViewById(R.id.click_post_image);
-        PostDescription = findViewById(R.id.click_post_description);
-        DeletePostButton = findViewById(R.id.delete_post_button);
-        EditPostButton = findViewById(R.id.edit_post_button);
+        postImg = findViewById(R.id.click_post_image);
+        postDesc = findViewById(R.id.click_post_description);
+        deletePostBtn = findViewById(R.id.delete_post_button);
+        editPostBtn = findViewById(R.id.edit_post_button);
 
-        DeletePostButton.setVisibility(View.INVISIBLE);
-        EditPostButton.setVisibility(View.INVISIBLE);
+        deletePostBtn.setVisibility(View.INVISIBLE);
+        editPostBtn.setVisibility(View.INVISIBLE);
 
         ClickPostRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -58,15 +58,15 @@ public class ClickPostActivity extends AppCompatActivity {
 
                     databaseUserID = dataSnapshot.child("uid").getValue().toString();
 
-                    PostDescription.setText(description);
-                    Picasso.with(ClickPostActivity.this).load(image).into(PostImage);
+                    postDesc.setText(description);
+                    Picasso.with(ClickPostActivity.this).load(image).into(postImg);
 
                     if(currentUserId.equals(databaseUserID)){
-                        DeletePostButton.setVisibility(View.VISIBLE);
-                        EditPostButton.setVisibility(View.VISIBLE);
+                        deletePostBtn.setVisibility(View.VISIBLE);
+                        editPostBtn.setVisibility(View.VISIBLE);
                     }
 
-                    EditPostButton.setOnClickListener(new View.OnClickListener() {
+                    editPostBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             EditCurrentPost(description);
@@ -81,7 +81,7 @@ public class ClickPostActivity extends AppCompatActivity {
             }
         });
 
-        DeletePostButton.setOnClickListener(new View.OnClickListener() {
+        deletePostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DeleteCurrentPost();
@@ -119,7 +119,7 @@ public class ClickPostActivity extends AppCompatActivity {
     private void DeleteCurrentPost() {
         ClickPostRef.removeValue();
         SendUserToMainActivity();
-        Toast.makeText(this, "Post has been deleted", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Post deleted", Toast.LENGTH_LONG).show();
     }
 
     private void SendUserToMainActivity() {

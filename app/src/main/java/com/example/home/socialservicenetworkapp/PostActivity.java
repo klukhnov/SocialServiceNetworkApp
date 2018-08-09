@@ -36,19 +36,19 @@ public class PostActivity extends AppCompatActivity
     private Toolbar mToolbar;
     private ProgressDialog loadingBar;
 
-    private ImageButton SelectPostImage;
-    private Button UpdatePostButton;
-    private EditText PostDescription;
+    private ImageButton selectPostImg;
+    private Button updatePostBtn;
+    private EditText postDesc;
 
     private static final int Gallery_Pick = 1;
-    private Uri ImageUri;
-    private String Description;
+    private Uri imageUri;
+    private String desc;
 
-    private StorageReference PostsImagesRefrence;
+    private StorageReference postImageRef;
     private DatabaseReference UsersRef, PostsRef;
     private FirebaseAuth mAuth;
 
-    private String saveCurrentDate, saveCurrentTime, postRandomName, downloadUrl, current_user_id;
+    private String saveCurrentDate, saveCurrentTime, postRandomName, downloadUrl, currentUserId;
 
 
     @Override
@@ -59,16 +59,16 @@ public class PostActivity extends AppCompatActivity
 
 
         mAuth = FirebaseAuth.getInstance();
-        current_user_id = mAuth.getCurrentUser().getUid();
+        currentUserId = mAuth.getCurrentUser().getUid();
 
-        PostsImagesRefrence = FirebaseStorage.getInstance().getReference();
+        postImageRef = FirebaseStorage.getInstance().getReference();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
 
-        SelectPostImage = findViewById(R.id.select_post_image);
-        UpdatePostButton = findViewById(R.id.update_post_button);
-        PostDescription = findViewById(R.id.post_description);
+        selectPostImg = findViewById(R.id.select_post_image);
+        updatePostBtn = findViewById(R.id.update_post_button);
+        postDesc = findViewById(R.id.post_description);
         loadingBar = new ProgressDialog(this);
 
 
@@ -83,7 +83,7 @@ public class PostActivity extends AppCompatActivity
         mToolbar.setNavigationIcon(R.drawable.backbutton);
 
 
-        SelectPostImage.setOnClickListener(new View.OnClickListener() {
+        selectPostImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -92,7 +92,7 @@ public class PostActivity extends AppCompatActivity
         });
 
 
-        UpdatePostButton.setOnClickListener(new View.OnClickListener() {
+        updatePostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -105,13 +105,13 @@ public class PostActivity extends AppCompatActivity
 
     private void ValidatePostInfo()
     {
-        Description = PostDescription.getText().toString();
+        desc = postDesc.getText().toString();
 
-        if(ImageUri == null)
+        if(imageUri == null)
         {
             Toast.makeText(this, "Please select an image...", Toast.LENGTH_SHORT).show();
         }
-        else if(TextUtils.isEmpty(Description))
+        else if(TextUtils.isEmpty(desc))
         {
             Toast.makeText(this, "Please add description...", Toast.LENGTH_SHORT).show();
         }
@@ -141,9 +141,9 @@ public class PostActivity extends AppCompatActivity
         postRandomName = saveCurrentDate + saveCurrentTime;
 
 
-        StorageReference filePath = PostsImagesRefrence.child("Post Images").child(ImageUri.getLastPathSegment() + postRandomName + ".jpg");
+        StorageReference filePath = postImageRef.child("Post Images").child(imageUri.getLastPathSegment() + postRandomName + ".jpg");
 
-        filePath.putFile(ImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+        filePath.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task)
             {
@@ -166,7 +166,7 @@ public class PostActivity extends AppCompatActivity
 
     private void SavingPostInformationToDatabase()
     {
-        UsersRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
+        UsersRef.child(currentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
@@ -176,14 +176,14 @@ public class PostActivity extends AppCompatActivity
                     String userProfileImage = dataSnapshot.child("profileimage").getValue().toString();
 
                     HashMap postsMap = new HashMap();
-                    postsMap.put("uid", current_user_id);
+                    postsMap.put("uid", currentUserId);
                     postsMap.put("date", saveCurrentDate);
                     postsMap.put("time", saveCurrentTime);
-                    postsMap.put("description", Description);
+                    postsMap.put("description", desc);
                     postsMap.put("postimage", downloadUrl);
                     postsMap.put("profileimage", userProfileImage);
                     postsMap.put("fullname", userFullName);
-                    PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
+                    PostsRef.child(currentUserId + postRandomName).updateChildren(postsMap)
                             .addOnCompleteListener(new OnCompleteListener() {
                                 @Override
                                 public void onComplete(@NonNull Task task)
@@ -230,8 +230,8 @@ public class PostActivity extends AppCompatActivity
 
         if(requestCode==Gallery_Pick && resultCode==RESULT_OK && data!=null)
         {
-            ImageUri = data.getData();
-            SelectPostImage.setImageURI(ImageUri);
+            imageUri = data.getData();
+            selectPostImg.setImageURI(imageUri);
         }
     }
 

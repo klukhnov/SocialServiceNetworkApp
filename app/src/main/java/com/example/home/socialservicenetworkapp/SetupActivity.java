@@ -32,9 +32,9 @@ import java.util.HashMap;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SetupActivity extends AppCompatActivity {
-    private EditText UserName, FullName, CountryName;
-    private Button SaveInformationbuttion;
-    private CircleImageView ProfileImage;
+    private EditText userName, fullName, countryName;
+    private Button saveInformationBtn;
+    private CircleImageView profileImage;
     private ProgressDialog loadingBar;
 
     private FirebaseAuth mAuth;
@@ -57,15 +57,15 @@ public class SetupActivity extends AppCompatActivity {
         // the relevant folder will be created in the Firebase database
 
 
-        UserName = findViewById(R.id.setup_username);
-        FullName = findViewById(R.id.setup_full_name);
-        CountryName = findViewById(R.id.setup_country);
-        SaveInformationbuttion = findViewById(R.id.setup_information_button);
-        ProfileImage = findViewById(R.id.setup_profile_image);
+        userName = findViewById(R.id.setup_username);
+        fullName = findViewById(R.id.setup_full_name);
+        countryName = findViewById(R.id.setup_country);
+        saveInformationBtn = findViewById(R.id.setup_information_button);
+        profileImage = findViewById(R.id.setup_profile_image);
         loadingBar = new ProgressDialog(this);
 
 
-        SaveInformationbuttion.setOnClickListener(new View.OnClickListener() {
+        saveInformationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SaveAccountSetupInformation();
@@ -73,7 +73,7 @@ public class SetupActivity extends AppCompatActivity {
         });
 
 
-        ProfileImage.setOnClickListener(new View.OnClickListener() {
+        profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent galleryIntent = new Intent();
@@ -90,7 +90,7 @@ public class SetupActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     if (dataSnapshot.hasChild("profileimage")) {
                         String image = dataSnapshot.child("profileimage").getValue().toString();
-                        Picasso.with(SetupActivity.this).load(image).placeholder(R.drawable.profile).into(ProfileImage);
+                        Picasso.with(SetupActivity.this).load(image).placeholder(R.drawable.profile).into(profileImage);
                     } else {
                         Toast.makeText(SetupActivity.this, "Please select profile image first.", Toast.LENGTH_SHORT).show();
                     }
@@ -169,9 +169,9 @@ public class SetupActivity extends AppCompatActivity {
 
 
     private void SaveAccountSetupInformation() {
-        String username = UserName.getText().toString();
-        String fullname = FullName.getText().toString();
-        String country = CountryName.getText().toString();
+        String username = userName.getText().toString();
+        String fullname = fullName.getText().toString();
+        String country = countryName.getText().toString();
 
         if (TextUtils.isEmpty(username)) {
             Toast.makeText(this, "Please write your username...", Toast.LENGTH_SHORT).show();
