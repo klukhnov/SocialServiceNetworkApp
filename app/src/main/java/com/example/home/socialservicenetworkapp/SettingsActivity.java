@@ -2,8 +2,11 @@ package com.example.home.socialservicenetworkapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,7 +55,8 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
     private ProgressDialog loadingBar;
     private StorageReference UserProfileImageRef;
-    private Spinner staticSpinner;
+    private Spinner statusSpinner;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +71,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         mToolbar.setTitleTextColor(Color.BLACK);
         mToolbar.setTitleTextAppearance(this, R.style.NavigationText);
         mToolbar.setNavigationIcon(R.drawable.backbutton);
-        staticSpinner = (Spinner) findViewById(R.id.spinnerStatus);
-
+        statusSpinner = findViewById(R.id.spinnerStatus);
 
         userName = findViewById(R.id.settings_username);
         userProfName = findViewById(R.id.settings_full_name);
@@ -81,14 +84,27 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         UpdateAcountSettingsButton = findViewById(R.id.update_account_settings_button);
         loadingBar = new ProgressDialog(this);
 
-        ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter
+        //statusAdapter//
+        ArrayAdapter<CharSequence> statusAdapter = ArrayAdapter
                 .createFromResource(this, R.array.status_array,
                         android.R.layout.simple_spinner_item);
-        staticAdapter
+        statusAdapter
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        statusSpinner.setAdapter(statusAdapter);
+        statusSpinner.setOnItemSelectedListener(this);
+        statusSpinner.getBackground().setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_ATOP);
 
-        staticSpinner.setAdapter(staticAdapter);
-        staticSpinner.setOnItemSelectedListener(this);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String status = preferences.getString("status", "");
+        if(!status.equalsIgnoreCase(""))
+        {
+            int spinnerPosition = statusAdapter.getPosition(status);
+            statusSpinner.setSelection(spinnerPosition);
+
+        }
+        //
+
 
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
@@ -199,7 +215,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                     }
                 });
             } else {
-                Toast.makeText(this, "Error Occured: Image can not be cropped. Try Again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Error occured: Image can not be cropped. Try Again.", Toast.LENGTH_SHORT).show();
                 loadingBar.dismiss();
             }
         }
@@ -208,9 +224,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     private void ValidateAccountInfo() {
         String username = userName.getText().toString();
         String usersprofilename = userProfName.getText().toString();
-
-        String userstatus = userStatus.getText().toString(); //--
-
+        String userstatus = userStatus.getText().toString();
         String usersdob = userDOB.getText().toString();
         String userscountry = userCountry.getText().toString();
         String usersgender = userGender.getText().toString();
@@ -279,6 +293,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 userStatus.setText("Inactive");
                 break;
         }
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("status",statusSpinner.getSelectedItem().toString());
+        editor.apply();
     }
 
     @Override

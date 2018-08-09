@@ -32,20 +32,28 @@
                 android:id="@+id/spinnerStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/settings_profile_image" />
+                android:layout_alignStart="@+id/settings_profile_image"
+                android:layout_below="@+id/settings_profile_image"
+                android:layout_marginLeft="80dp"
+                android:theme="@style/SpinnerItem" />
 
             <EditText
                 android:id="@+id/settings_status"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="5dp"
                 android:layout_below="@+id/spinnerStatus"
-                android:hint="Profile status" />
+                android:hint="Profile status"
+                android:fontFamily="@font/bredfont"
+                android:textColor="@color/colorBlack"
+                android:visibility="invisible" />
 
             <EditText
                 android:id="@+id/settings_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/settings_status"
+                android:fontFamily="@font/bredfont"
+                android:textColor="@color/colorBlack"
                 android:hint="Username" />
 
             <EditText
@@ -53,6 +61,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/settings_username"
+                android:fontFamily="@font/bredfont"
+                android:textColor="@color/colorBlack"
                 android:hint="Full name" />
 
             <EditText
@@ -60,6 +70,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/settings_full_name"
+                android:fontFamily="@font/bredfont"
+                android:textColor="@color/colorBlack"
                 android:hint="Country" />
 
             <EditText
@@ -67,6 +79,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/settings_country"
+                android:fontFamily="@font/bredfont"
+                android:textColor="@color/colorBlack"
                 android:hint="Date of birth" />
 
             <EditText
@@ -74,6 +88,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/settings_dob"
+                android:fontFamily="@font/bredfont"
+                android:textColor="@color/colorBlack"
                 android:hint="Relationship status" />
 
             <EditText
@@ -81,7 +97,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/settings_relationship_status"
-                android:hint="Gende" />
+                android:fontFamily="@font/bredfont"
+                android:textColor="@color/colorBlack"
+                android:hint="Gender" />
 
             <Button
                 android:id="@+id/update_account_settings_button"
@@ -90,6 +108,18 @@
                 android:layout_below="@+id/settings_gender"
                 android:background="@drawable/button"
                 android:text="Update account settings" />
+
+            <TextView
+                android:id="@+id/textViewStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/settings_profile_image"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/bredfont"
+                android:text="Status"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp" />
 
 
         </RelativeLayout>
