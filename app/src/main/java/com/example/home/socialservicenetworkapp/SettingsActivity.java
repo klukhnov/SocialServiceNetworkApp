@@ -105,7 +105,6 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         }
         //
 
-
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
         SettingsUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);

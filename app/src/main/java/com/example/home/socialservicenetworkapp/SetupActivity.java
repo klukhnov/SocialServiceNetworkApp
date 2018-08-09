@@ -57,11 +57,11 @@ public class SetupActivity extends AppCompatActivity {
         // the relevant folder will be created in the Firebase database
 
 
-        UserName = (EditText) findViewById(R.id.setup_username);
-        FullName = (EditText) findViewById(R.id.setup_full_name);
-        CountryName = (EditText) findViewById(R.id.setup_country);
-        SaveInformationbuttion = (Button) findViewById(R.id.setup_information_button);
-        ProfileImage = (CircleImageView) findViewById(R.id.setup_profile_image);
+        UserName = findViewById(R.id.setup_username);
+        FullName = findViewById(R.id.setup_full_name);
+        CountryName = findViewById(R.id.setup_country);
+        SaveInformationbuttion = findViewById(R.id.setup_information_button);
+        ProfileImage = findViewById(R.id.setup_profile_image);
         loadingBar = new ProgressDialog(this);
 
 

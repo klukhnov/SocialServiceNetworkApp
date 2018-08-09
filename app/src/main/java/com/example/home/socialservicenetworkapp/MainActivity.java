@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
         PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
 
-
-        mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
+// mTolbar code
+        mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Menu");
         mToolbar.setTitle("Menu");
@@ -71,16 +71,16 @@ public class MainActivity extends AppCompatActivity {
         mToolbar.setTitleTextAppearance(this, R.style.NavigationText);
 
         AddNewPostButton = findViewById(R.id.add_new_post_button);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawable_layout);
+        drawerLayout = findViewById(R.id.drawable_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.hmenu);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView = findViewById(R.id.navigation_view);
 
-        postList = (RecyclerView) findViewById(R.id.all_users_post_list);
+        postList = findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
@@ -89,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         View navView = navigationView.inflateHeaderView(R.layout.navigation_header);
-        NavProfileImage = (CircleImageView) navView.findViewById(R.id.nav_profile_image);
-        NavProfileUserName = (TextView) navView.findViewById(R.id.nav_user_full_name);
+        NavProfileImage = navView.findViewById(R.id.nav_profile_image);
+        NavProfileUserName = navView.findViewById(R.id.nav_user_full_name);
 
 
         UsersRef.child(currentUserID).addValueEventListener(new ValueEventListener() {

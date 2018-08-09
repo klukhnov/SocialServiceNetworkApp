@@ -66,13 +66,13 @@ public class PostActivity extends AppCompatActivity
         PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
 
-        SelectPostImage = (ImageButton) findViewById(R.id.select_post_image);
-        UpdatePostButton = (Button) findViewById(R.id.update_post_button);
-        PostDescription =(EditText) findViewById(R.id.post_description);
+        SelectPostImage = findViewById(R.id.select_post_image);
+        UpdatePostButton = findViewById(R.id.update_post_button);
+        PostDescription = findViewById(R.id.post_description);
         loadingBar = new ProgressDialog(this);
 
 
-        mToolbar = (Toolbar) findViewById(R.id.update_post_page_toolbar);
+        mToolbar = findViewById(R.id.update_post_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true); // for adding a back button

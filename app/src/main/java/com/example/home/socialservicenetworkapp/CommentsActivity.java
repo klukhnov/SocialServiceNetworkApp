@@ -1,12 +1,10 @@
 package com.example.home.socialservicenetworkapp;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -113,22 +111,22 @@ public class CommentsActivity extends AppCompatActivity {
         }
 
         public void setUsername(String username) {
-            TextView myUserName = (TextView) mView.findViewById(R.id.comment_username);
+            TextView myUserName = mView.findViewById(R.id.comment_username);
             myUserName.setText(" " + username + " ");
         }
 
         public void setComment(String comment) {
-            TextView myComment = (TextView) mView.findViewById(R.id.comment_text);
+            TextView myComment = mView.findViewById(R.id.comment_text);
             myComment.setText(comment);
         }
 
         public void setDate(String date){
-            TextView myDate = (TextView) mView.findViewById(R.id.comment_date);
+            TextView myDate = mView.findViewById(R.id.comment_date);
             myDate.setText(" on: " + date);
         }
 
         public void setTime(String time) {
-            TextView myTime = (TextView) mView.findViewById(R.id.comment_time);
+            TextView myTime = mView.findViewById(R.id.comment_time);
             myTime.setText(" at: " + time);
         }
 

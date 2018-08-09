@@ -107,6 +107,8 @@
                 android:layout_height="60dp"
                 android:layout_below="@+id/settings_gender"
                 android:background="@drawable/button"
+                android:fontFamily="@font/bredfont"
+                android:textColor="@color/colorBlack"
                 android:text="Update account settings" />
 
             <TextView
