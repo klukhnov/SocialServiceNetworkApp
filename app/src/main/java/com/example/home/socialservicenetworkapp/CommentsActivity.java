@@ -160,7 +160,7 @@ public class CommentsActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Toast.makeText(CommentsActivity.this, "Comment saved", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(CommentsActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CommentsActivity.this, "Error!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
