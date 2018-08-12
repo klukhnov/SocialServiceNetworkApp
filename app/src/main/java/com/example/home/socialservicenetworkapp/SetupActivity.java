@@ -174,15 +174,15 @@ public class SetupActivity extends AppCompatActivity {
         String country = countryName.getText().toString();
 
         if (TextUtils.isEmpty(username)) {
-            Toast.makeText(this, "Please write your username...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please add your username...", Toast.LENGTH_SHORT).show();
         }
         if (TextUtils.isEmpty(fullname)) {
-            Toast.makeText(this, "Please write your full name...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please add your full name...", Toast.LENGTH_SHORT).show();
         }
         if (TextUtils.isEmpty(country)) {
-            Toast.makeText(this, "Please write your country...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please add your country...", Toast.LENGTH_SHORT).show();
         } else {
-            loadingBar.setTitle("Saving Information");
+            loadingBar.setTitle("Saving information");
             loadingBar.setMessage("Please wait, while we are creating your new Account...");
             loadingBar.show();
             loadingBar.setCanceledOnTouchOutside(true);
@@ -191,7 +191,7 @@ public class SetupActivity extends AppCompatActivity {
             userMap.put("username", username);
             userMap.put("fullname", fullname);
             userMap.put("country", country);
-            userMap.put("status", "Hey there, i am using Poster Social Network, developed by Coding Cafe.");
+            userMap.put("status", "Hey there.");
             userMap.put("gender", "none");
             userMap.put("dob", "none");
             userMap.put("relationshipstatus", "none");
@@ -200,7 +200,7 @@ public class SetupActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task task) {
                     if (task.isSuccessful()) {
                         SendUserToMainActivity();
-                        Toast.makeText(SetupActivity.this, "your Account is created Successfully.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SetupActivity.this, "Account created.", Toast.LENGTH_LONG).show();
                         loadingBar.dismiss();
                     } else {
                         String message = task.getException().getMessage();
